@@ -118,3 +118,18 @@ int main(int argc, char *argv[]) {
             return 0;
         }
     }
+
+
+    /* Ler n (número de linhas/andares) */
+    if (fscanf(in, "%d", &R) != 1) { fclose(in); return 0; }
+
+    /* resto da linha para usar fgets a seguir */
+    int ch;
+    while ((ch = fgetc(in)) != '\n' && ch != EOF) {}
+
+    /* linhas do edifício  */
+    char raw[999], clean[MAXC];
+    C = 0;
+
+
+
