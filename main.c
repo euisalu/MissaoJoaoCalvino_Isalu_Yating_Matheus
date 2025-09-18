@@ -67,3 +67,54 @@ static int parse_line(const char *src, char *dest) {
 }
 
 
+/*
+  backtrack(r, c):
+  —  recursivaaaaaaaa
+  — Tenta alcançar '*' partindo de (r, c).
+  — Respeita as regras da célula atual (H = horizontal, V = vertical).
+  — Usa 'visited' para não repetir posição e evitar ciclos (backtracking comportado).
+*/
+
+static bool backtrack(int r, int c) {
+    // 1) conferinfo se esta fora do predio
+    if (r < 0 || r >= R || c < 0 || c >= C) return false;
+
+    // 2) Já passei por aqui neste caminho?
+    if (visited[r][c]) return false;
+
+    // 3) Cheguei na estrela? 
+    if (grid[r][c] == '*') return true;
+
+    // 4) Marco como visitado antes de expandir 
+    visited[r][c] = true;
+
+    // 5) Expando conforme a REGRA da célula atual HORIZONTAL E VERTUCAK:
+    if (grid[r][c] == 'H') {
+        // Só me permito ir pros lados: esquerda e direita
+        if (backtrack(r, c - 1)) return true;  // tenta esquerda
+        if (backtrack(r, c + 1)) return true;  // tenta direita
+    } else if (grid[r][c] == 'V') {
+        // Só subo/desço, elegante e vertical
+        if (backtrack(r - 1, c)) return true;  // tenta cima
+        if (backtrack(r + 1, c)) return true;  // tenta baixo
+    } else {
+        // Se cair aqui não é H nem V nem * 
+    }
+
+    // 6) Nenhum caminho daqui levou à estrela. Volto um nível (backtrack
+    return false;
+}
+
+
+int main(int argc, char *argv[]) {
+    
+    // Abrir o ARQUIVO .txt BOTEI ENTRADA
+    const char *path = (argc >= 2) ? argv[1] : "entrada.txt";
+    FILE *in = fopen(path, "r");
+    if (!in) {
+    
+        if (argc >= 2) in = fopen("entrada.txt", "r");
+        if (!in) {
+            return 0;
+        }
+    }
