@@ -131,5 +131,16 @@ int main(int argc, char *argv[]) {
     char raw[999], clean[MAXC];
     C = 0;
 
+/* tem que codar linhas do edf , ya ou matheus */ 
+
+/* Ler posição inicial linha, coluna */
+    int sr = 0, sc = 0;
+    if (fscanf(in, "%d %d", &sr, &sc) != 2) { fclose(in); return 0; }
+
+    fclose(in);
+
+    /* Resolver com backtracking*/
+    bool ok = backtrack(sr, sc);
+
 
 
