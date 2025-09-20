@@ -3,6 +3,7 @@ Solução do desafio "Missão João Calvino"
 
 Universidade Presbiteriana Mackenzie
 Algoritmos e Programação II — Projeto 1 (Missão João Calvino)
+
 **Turma 04N**
 
 ## Integrantes
@@ -17,7 +18,7 @@ Aqui está um guia detalhado para executar o programa de encontrar a chave perdi
 ### Passo 2: Preparar o Arquivo de Entrada
 * Crie um arquivo de texto chamado entrada.txt
 * Copie o seguinte conteúdo para o arquivo:
-  ```
+```
 5
 HVVVHV
 HHVVVV
@@ -25,7 +26,7 @@ HVHVVH
 *HVVHV
 HHHVHH
 0 0
-  ```
+```
 ### Passo 3: Compilar o Programa
 Abra o terminal ou prompt de comando, navegue até o diretório onde salvou o código e execute:
 ```bash
