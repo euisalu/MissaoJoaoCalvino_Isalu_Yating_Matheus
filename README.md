@@ -29,8 +29,8 @@ HHHVHH
 ```
 ### Passo 3: Compilar o Programa
 Abra o terminal ou prompt de comando, navegue até o diretório onde salvou o código e execute:
-```bash
-gcc -o main.exe main.c
+```
+gcc -o main.exe *.c *.h
 ```
 Este comando compilará o código e criará um arquivo executável chamado main.exe.
 ### Passo 4: Executar o Programa
@@ -60,6 +60,26 @@ main.exe teste2.txt
 A saída esperada será:
 ```
 Não conseguimos encontrar a chave no Edifício João Calvino.
+```
+Crie um arquivo teste3.txt com:
+```
+7
+HVVVHHHVV
+HVVVHVVHV
+HHHVVHHHV
+VVHVVHVVV
+HHHVVHVH*
+HHVHHHHHH
+VVVVVVVVV
+0 4
+```
+Execute com:
+```
+main.exe teste3.txt
+```
+A saída esperada será:
+```
+Chave encontrada no Edifício João Calvino!
 ```
 ### Observações
 1. Certifique-se de ter o GCC instalado no Windows. Se não tiver, você pode instalar o MinGW ou usar o WSL (Windows Subsystem for Linux).
