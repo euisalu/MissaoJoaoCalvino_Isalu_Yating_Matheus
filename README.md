@@ -17,7 +17,7 @@ Aqui está um guia detalhado para executar o programa de encontrar a chave perdi
 ### Passo 2: Preparar o Arquivo de Entrada
 * Crie um arquivo de texto chamado entrada.txt
 * Copie o seguinte conteúdo para o arquivo:
-  '''
+  ```
     5
     HVVVHV
     HHVVVV
@@ -25,5 +25,5 @@ Aqui está um guia detalhado para executar o programa de encontrar a chave perdi
     *HVVHV
     HHHVHH
     0 0
-  '''
+  ```
 
