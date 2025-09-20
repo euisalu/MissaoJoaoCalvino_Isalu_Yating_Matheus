@@ -28,20 +28,21 @@
 
 
 
-include <stdio.h>    
-include <stdbool.h> 
-include <string.h>   
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+// limite máximo de linhas (andares) — bem folgado
+#define MAXR 100
+// limite máximo de colunas — folgadinha também
+#define MAXC 100      // limite máximo de colunas — folgadinha também
 
-define MAXR 100      // limite máximo de linhas (andares) — bem folgado
-define MAXC 100      // limite máximo de colunas — folgadinha também
-
-// Matriz do prédio e controle de visitados (pra não andar em loop, né?)
+// Matriz do prédio e controle de visitados
 static char  grid[MAXR][MAXC];
 static bool  visited[MAXR][MAXC];
 
 // Dimensões efetivas lidas do arquivo
 static int R = 0;     // número de linhas (andares)
-static int C = 0;    
+static int C = 0;     // número de colunas
 
 
 /*
@@ -59,12 +60,14 @@ static int parse_line(const char *src, char *dest) {
     for (int i = 0; src[i]; i++) {
         char ch = src[i];
         if (ch == 'H' || ch == 'V' || ch == '*') {
-            dest[k++] = ch;     // peguei só o que interessa
+            dest[k++] = ch;
         }
-        // qualquer outra coisa (espaço, tab, etc.) eu ignoro belamente
+	// qualquer outra coisa (espaço, tab, etc.) eu ignoro belamente
     }
-    return k; // “k” é quantas colunas válidas encontramos nessa linha
+    dest[k] = '\0'; // Adiciona o terminador de string
+    return k;
 }
+
 
 
 /*
@@ -97,11 +100,9 @@ static bool backtrack(int r, int c) {
         // Só subo/desço, elegante e vertical
         if (backtrack(r - 1, c)) return true;  // tenta cima
         if (backtrack(r + 1, c)) return true;  // tenta baixo
-    } else {
-        // Se cair aqui não é H nem V nem * 
     }
 
-    // 6) Nenhum caminho daqui levou à estrela. Volto um nível (backtrack
+    visited[r][c] = false; // Desmarca (o backtrack)
     return false;
 }
 
@@ -111,10 +112,10 @@ int main(int argc, char *argv[]) {
     // Abrir o ARQUIVO .txt BOTEI ENTRADA
     const char *path = (argc >= 2) ? argv[1] : "entrada.txt";
     FILE *in = fopen(path, "r");
-    if (!in) {
+    if (!in) { // Falha ao abrir o arquivo
     
-        if (argc >= 2) in = fopen("entrada.txt", "r");
-        if (!in) {
+        if (argc >= 2) in = fopen("entrada.txt", "r"); // Tenta abrir o arquivo sem especificar caminho, apenas no path onde o código está armazenado
+        if (!in) { // Não foi possivel retornar o arquivo
             return 0;
         }
     }
@@ -126,13 +127,22 @@ int main(int argc, char *argv[]) {
     /* resto da linha para usar fgets a seguir */
     int ch;
     while ((ch = fgetc(in)) != '\n' && ch != EOF) {}
-
+  
     /* linhas do edifício  */
     char raw[999], clean[MAXC];
-    C = 0;
-
-    /* tem que codar pra ler as linhas do edf , ya ou matheus */ 
-
+  
+    for (int i = 0; i < R; i++) {
+        if (fgets(raw, sizeof(raw), in) == NULL) {
+             // Tratamento de erro se o arquivo terminar antes
+             fclose(in); return 0;
+        }
+        int cols = parse_line(raw, clean);
+        if (i == 0) {
+            C = cols; // Define o número de colunas na primeira linha
+        }
+        strcpy(grid[i], clean); // Copia a linha limpa para a matriz final
+    }
+  
     /* Ler posição inicial linha, coluna */
     int sr = 0, sc = 0;
     if (fscanf(in, "%d %d", &sr, &sc) != 2) { fclose(in); return 0; }
