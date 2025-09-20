@@ -91,7 +91,7 @@ static bool backtrack(int r, int c) {
     // 4) Marco como visitado antes de expandir 
     visited[r][c] = true;
 
-    // 5) Expando conforme a REGRA da célula atual HORIZONTAL E VERTUCAK:
+    // 5) Expando conforme a REGRA da célula atual HORIZONTAL E VERTICAL:
     if (grid[r][c] == 'H') {
         // Só me permito ir pros lados: esquerda e direita
         if (backtrack(r, c - 1)) return true;  // tenta esquerda
