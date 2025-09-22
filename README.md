@@ -91,3 +91,9 @@ Chave encontrada no Edifício João Calvino!
    · Última linha: posição inicial (linha e coluna)
 
 Este guia fornece todas as etapas necessárias para compilar e executar o programa no Windows conforme especificado.
+
+
+
+Link Do youtube :
+
+https://www.youtube.com/watch?v=NWxrStOB4pY
